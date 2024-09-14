@@ -18,10 +18,6 @@ local function setup()
 			end,
 		}
 	)
-
-	vim.api.nvim_create_user_command("TestCommand", function()
-		print("TestCommand executed")
-	end, {})
 end
 
 return { setup = setup }
