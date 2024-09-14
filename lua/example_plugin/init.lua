@@ -9,3 +9,5 @@ local function setup()
 		{ group = augroup, desc = "An example plugin", once = true, callback = main }
 	)
 end
+
+return { setup = setup }
