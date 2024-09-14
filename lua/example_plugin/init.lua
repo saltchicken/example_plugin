@@ -8,6 +8,10 @@ local function setup()
 		"VimEnter",
 		{ group = augroup, desc = "An example plugin", once = true, callback = main }
 	)
+
+	vim.api.nvim_create_user_command("TestCommand", function()
+		print("TestCommand executed")
+	end, {})
 end
 
 return { setup = setup }
