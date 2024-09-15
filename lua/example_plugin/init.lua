@@ -105,8 +105,8 @@ custom_source.complete = function(self, request, callback)
 		else
 			print("Response String ----- ", type(response))
 			print("Response String ----- ", response)
-			local cjson = require("cjson")
-			local obj = cjson.decode(response)
+			local cjson = require("json")
+			local obj = json.decode(response)
 			print("Finall", obj.response)
 			local items = {
 				{
