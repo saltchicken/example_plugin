@@ -99,15 +99,6 @@ custom_source.get_metadata = function()
 end
 
 custom_source.complete = function(self, request, callback)
-	-- Simulate an asynchronous operation
-	-- for key, value in pairs(request) do
-	-- 	print(key)
-	-- 	print(value)
-	-- end
-	-- print(request.name)
-	-- for key, value in pairs(request.context) do
-	-- 	print(key, value)
-	-- end
 	M.send_post_request(function(response, error)
 		if error then
 			print(error)
@@ -121,44 +112,13 @@ custom_source.complete = function(self, request, callback)
 					insertText = response,
 				},
 			}
-			callback(items)
+			callback({
+				items = items,
+				isIncomplete = true,
+			})
 		end
 	end)
-	-- vim.defer_fn(function()
-	-- 	local items = {
-	-- 		{
-	-- 			label = "HelloWorld",
-	-- 			kind = cmp.lsp.CompletionItemKind.Text,
-	-- 			-- You can include additional fields here
-	-- 		},
-	-- 	}
-	-- 	callback(items)
-	-- end, 5000) -- Simulate a delay of 500ms (0.5 seconds)
 end
--- This function defines the behavior of the completion source
--- custom_source.complete = function(self, request, callback)
--- 	-- Define custom completion items
--- 	local items = {
--- 		{
--- 			label = "print",
--- 			kind = cmp.lsp.CompletionItemKind.Function,
--- 			documentation = "Prints a message to the console",
--- 			insertText = 'print("Custom Output: ")',
--- 		},
--- 		{
--- 			label = "custom_func",
--- 			kind = cmp.lsp.CompletionItemKind.Function,
--- 			documentation = "This is a custom function with extra output",
--- 			insertText = "custom_func(arg)",
--- 		},
--- 		{
--- 			label = "my_var",
--- 			kind = cmp.lsp.CompletionItemKind.Variable,
--- 			documentation = "Custom variable with additional context",
--- 			insertText = "my_var = 42 -- Custom assignment",
--- 		},
--- 	}
---
 -- 	-- Return the completion items as the result
 -- 	callback({
 -- 		items = items,
