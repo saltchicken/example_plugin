@@ -106,7 +106,7 @@ custom_source.complete = function(self, request, callback)
 		else
 			-- print("Response String ----- ", type(response))
 			-- print("Response String ----- ", response)
-			local json = require("json")
+			local json = require("example_plugin.json")
 			local obj = json.decode(response)
 			print("Response: ", obj.response)
 			local items = {
