@@ -107,7 +107,7 @@ custom_source.complete = function(self, request, callback)
 			-- print("Response String ----- ", type(response))
 			-- print("Response String ----- ", response)
 			package.path = package.path .. ";./?.lua"
-			local json = require("example_plugin.json")
+			local json = require("json")
 			local obj = json.decode(response)
 			print("Response: ", obj.response)
 			local items = {
