@@ -25,21 +25,6 @@
 -- local function setup()
 -- 	require("example_plugin.cmp_source").setup()
 -- end
-
-local function print_table(tbl, indent)
-	indent = indent or 0
-	local formatting = string.rep("  ", indent)
-
-	for key, value in pairs(tbl) do
-		if type(value) == "table" then
-			print(formatting .. tostring(key) .. ":")
-			print_table(value, indent + 1)
-		else
-			print(formatting .. tostring(key) .. ": " .. tostring(value))
-		end
-	end
-end
-
 local cmp = require("cmp")
 
 local custom_source = {}
@@ -60,37 +45,49 @@ custom_source.get_metadata = function()
 	}
 end
 
--- This function defines the behavior of the completion source
-custom_source.complete = function(self, request, callback)
-	-- Define custom completion items
-	print_table(request)
-	local items = {
-		{
-			label = "print",
-			kind = cmp.lsp.CompletionItemKind.Function,
-			documentation = "Prints a message to the console",
-			insertText = 'print("Custom Output: ")',
-		},
-		{
-			label = "custom_func",
-			kind = cmp.lsp.CompletionItemKind.Function,
-			documentation = "This is a custom function with extra output",
-			insertText = "custom_func(arg)",
-		},
-		{
-			label = "my_var",
-			kind = cmp.lsp.CompletionItemKind.Variable,
-			documentation = "Custom variable with additional context",
-			insertText = "my_var = 42 -- Custom assignment",
-		},
-	}
-
-	-- Return the completion items as the result
-	callback({
-		items = items,
-		isIncomplete = false,
-	})
+custom_source.complete = function(_, _, callback)
+	-- Simulate an asynchronous operation
+	vim.defer_fn(function()
+		local items = {
+			{
+				label = "HelloWorld",
+				kind = cmp.lsp.CompletionItemKind.Text,
+				-- You can include additional fields here
+			},
+		}
+		callback(items)
+	end, 500) -- Simulate a delay of 500ms (0.5 seconds)
 end
+-- This function defines the behavior of the completion source
+-- custom_source.complete = function(self, request, callback)
+-- 	-- Define custom completion items
+-- 	local items = {
+-- 		{
+-- 			label = "print",
+-- 			kind = cmp.lsp.CompletionItemKind.Function,
+-- 			documentation = "Prints a message to the console",
+-- 			insertText = 'print("Custom Output: ")',
+-- 		},
+-- 		{
+-- 			label = "custom_func",
+-- 			kind = cmp.lsp.CompletionItemKind.Function,
+-- 			documentation = "This is a custom function with extra output",
+-- 			insertText = "custom_func(arg)",
+-- 		},
+-- 		{
+-- 			label = "my_var",
+-- 			kind = cmp.lsp.CompletionItemKind.Variable,
+-- 			documentation = "Custom variable with additional context",
+-- 			insertText = "my_var = 42 -- Custom assignment",
+-- 		},
+-- 	}
+--
+-- 	-- Return the completion items as the result
+-- 	callback({
+-- 		items = items,
+-- 		isIncomplete = false,
+-- 	})
+-- end
 
 -- Register the custom source in `cmp`
 cmp.register_source("custom_source", custom_source.new())
