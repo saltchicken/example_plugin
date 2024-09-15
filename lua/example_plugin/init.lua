@@ -80,7 +80,11 @@ end
 
 function print_table(tbl)
 	for key, value in pairs(tbl) do
-		print(key, "---", value)
+		if type(value) == "table" then
+			print(table(value))
+		else
+			print(key, "---", value)
+		end
 	end
 end
 
