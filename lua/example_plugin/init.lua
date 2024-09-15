@@ -105,7 +105,9 @@ custom_source.complete = function(self, request, callback)
 		else
 			print("Response String ----- ", type(response))
 			print("Response String ----- ", response)
-			local decoded_table = vim.fn.json_decode(response)
+			local cjson = require("cjson")
+			local obj = cjson.decode(response)
+			print("Finall", obj.response)
 			local items = {
 				{
 					label = "FirstSucess",
