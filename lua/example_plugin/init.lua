@@ -84,10 +84,8 @@ end
 custom_source.complete = function(self, request, callback)
 	-- Simulate an asynchronous operation
 	for key, value in pairs(request) do
-		print(key, value)
-		for k, v in pairs(value) do
-			print(k, v)
-		end
+		print(key)
+		print(value)
 	end
 	M.send_post_request(function(response, error)
 		if error then
