@@ -45,8 +45,11 @@ custom_source.get_metadata = function()
 	}
 end
 
-custom_source.complete = function(_, _, callback)
+custom_source.complete = function(self, request, callback)
 	-- Simulate an asynchronous operation
+	for key, value in pairs(request) do
+		print(key, value)
+	end
 	vim.defer_fn(function()
 		local items = {
 			{
