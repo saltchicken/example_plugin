@@ -26,22 +26,6 @@
 -- 	require("example_plugin.cmp_source").setup()
 -- end
 
-function printTable(tbl, indent)
-	if not indent then
-		indent = 0
-	end
-	local indent_str = string.rep(" ", indent)
-	for k, v in pairs(tbl) do
-		if type(v) == "table" then
-			print(indent_str .. tostring(k) .. ": {")
-			printTable(v, indent + 4)
-			print(indent_str .. "}")
-		else
-			print(indent_str .. tostring(k) .. ": " .. tostring(v))
-		end
-	end
-end
-
 local M = {}
 
 M.setup = function()
@@ -78,6 +62,22 @@ M.send_post_request = function(callback)
 	}):start()
 end
 
+M.printTable = function(tbl, indent)
+	if not indent then
+		indent = 0
+	end
+	local indent_str = string.rep(" ", indent)
+	for k, v in pairs(tbl) do
+		if type(v) == "table" then
+			print(indent_str .. tostring(k) .. ": {")
+			printTable(v, indent + 4)
+			print(indent_str .. "}")
+		else
+			print(indent_str .. tostring(k) .. ": " .. tostring(v))
+		end
+	end
+end
+
 local cmp = require("cmp")
 
 local custom_source = {}
@@ -108,7 +108,7 @@ custom_source.complete = function(self, request, callback)
 	-- for key, value in pairs(request.context) do
 	-- 	print(key, value)
 	-- end
-	print_table(request)
+	M.print_table(request)
 	M.send_post_request(function(response, error)
 		if error then
 			print(error)
