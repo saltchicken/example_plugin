@@ -48,7 +48,8 @@ end
 -- This function defines the behavior of the completion source
 custom_source.complete = function(self, request, callback)
 	-- Define custom completion items
-	print(request)
+	local inspect = require("inspect")
+	print(inspect(request))
 	local items = {
 		{
 			label = "print",
