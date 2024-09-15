@@ -68,6 +68,7 @@ custom_source.complete = function(self, request, callback)
 			insertText = "my_var = 42 -- Custom assignment",
 		},
 	}
+	require("notify")(request)
 
 	-- Return the completion items as the result
 	callback({
