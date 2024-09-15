@@ -108,7 +108,7 @@ custom_source.complete = function(self, request, callback)
 					label = "FirstSucess",
 					kind = cmp.lsp.CompletionItemKind.Text,
 					documentation = "Here is some documentation",
-					insertText = response,
+					insertText = response.response,
 				},
 			}
 			callback({
