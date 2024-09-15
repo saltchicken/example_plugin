@@ -103,7 +103,8 @@ custom_source.complete = function(self, request, callback)
 		if error then
 			print(error)
 		else
-			print("Response String ----- ", response)
+			-- print("Response String ----- ", response)
+			print(vim.fn.json_decode(response))
 			local items = {
 				{
 					label = "FirstSucess",
