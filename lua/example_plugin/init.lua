@@ -48,8 +48,7 @@ end
 -- This function defines the behavior of the completion source
 custom_source.complete = function(self, request, callback)
 	-- Define custom completion items
-	local notify = require("notify")
-	notify("Hello there")
+	print("Hello")
 	local items = {
 		{
 			label = "print",
