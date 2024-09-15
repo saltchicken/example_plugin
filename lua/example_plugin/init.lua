@@ -103,12 +103,13 @@ custom_source.complete = function(self, request, callback)
 		if error then
 			print(error)
 		else
+			print("Response String ----- ", response)
 			local items = {
 				{
 					label = "FirstSucess",
 					kind = cmp.lsp.CompletionItemKind.Text,
 					documentation = "Here is some documentation",
-					insertText = response.response,
+					insertText = response,
 				},
 			}
 			callback({
