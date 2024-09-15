@@ -90,19 +90,27 @@ custom_source.complete = function(self, request, callback)
 		if error then
 			print(error)
 		else
-			print("Response: ", response)
+			-- print("Response: ", response)
+			local items = {
+				{
+					label = "FirstSucess",
+					kind = cmp.lsp.CompletionItemKind.Text,
+					insertText = "So close",
+				},
+			}
+			callback(items)
 		end
 	end)
-	vim.defer_fn(function()
-		local items = {
-			{
-				label = "HelloWorld",
-				kind = cmp.lsp.CompletionItemKind.Text,
-				-- You can include additional fields here
-			},
-		}
-		callback(items)
-	end, 5000) -- Simulate a delay of 500ms (0.5 seconds)
+	-- vim.defer_fn(function()
+	-- 	local items = {
+	-- 		{
+	-- 			label = "HelloWorld",
+	-- 			kind = cmp.lsp.CompletionItemKind.Text,
+	-- 			-- You can include additional fields here
+	-- 		},
+	-- 	}
+	-- 	callback(items)
+	-- end, 5000) -- Simulate a delay of 500ms (0.5 seconds)
 end
 -- This function defines the behavior of the completion source
 -- custom_source.complete = function(self, request, callback)
