@@ -104,25 +104,17 @@ M.setup = function()
 	-- print("Custom NVim-CMP plugin loaded")
 end
 
-M.send_post_request = function(url, data)
+M.send_post_request = function()
 	local Job = require("plenary.job")
 	-- print(vim.fn.json_encode(data))
-  local command_line = {
-    model : "llama3.1",
-    prompt :"What was my last question? "
- }
 	Job:new({
 		command = "curl",
-		-- args = {
-		-- 	' -X POST http://localhost:11434/api/generate -d \'{"model", "llama3.1", "prompt": "What was my last question?"}\'',
-		-- },
 		args = {
 			"-X",
 			"POST",
-			url,
+			"http://localhost:11434/api/generate",
 			"-d",
-			vim.fn.json_encode(data),
-			-- data,
+			'{"model": "llama3.1", "prompt": "What was my last question?"}',
 			"-H",
 			"Content-Type: application/json",
 		},
