@@ -84,7 +84,7 @@ local M = {}
 
 M.setup = function()
 	-- Optionally, set custom configurations here
-	print("Custom NVim-CMP plugin loaded")
+	-- print("Custom NVim-CMP plugin loaded")
 end
 
 return M
