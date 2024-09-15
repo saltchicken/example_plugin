@@ -107,32 +107,31 @@ end
 M.send_post_request = function(url, data)
 	local Job = require("plenary.job")
 	-- print(vim.fn.json_encode(data))
-	Job
-		:new({
-			command = "curl",
-			args = {
-				' -X POST http://localhost:11434/api/generate -d \'{"model", "llama3.1", "prompt": "What was my last question?"}\'',
-			},
-			-- args = {
-			-- 	"-X",
-			-- 	"POST",
-			-- 	url,
-			-- 	"-d",
-			-- 	vim.fn.json_encode(data),
-			-- 	"-H",
-			-- 	"Content-Type: application/json",
-			-- },
-			on_exit = function(j, return_val)
-				if return_val == 0 then
-					print("POST request successful!")
-					print(table.concat(j:result(), "\n"))
-				else
-					print("POST request failed!")
-					print(table.concat(j:stderr_result(), "\n"))
-				end
-			end,
-		})
-		:start()
+	Job:new({
+		command = "curl",
+		-- args = {
+		-- 	' -X POST http://localhost:11434/api/generate -d \'{"model", "llama3.1", "prompt": "What was my last question?"}\'',
+		-- },
+		args = {
+			"-X",
+			"POST",
+			url,
+			"-d",
+			-- vim.fn.json_encode(data),
+			data,
+			"-H",
+			"Content-Type: application/json",
+		},
+		on_exit = function(j, return_val)
+			if return_val == 0 then
+				print("POST request successful!")
+				print(table.concat(j:result(), "\n"))
+			else
+				print("POST request failed!")
+				print(table.concat(j:stderr_result(), "\n"))
+			end
+		end,
+	}):start()
 end
 
 return M
