@@ -25,6 +25,21 @@
 -- local function setup()
 -- 	require("example_plugin.cmp_source").setup()
 -- end
+
+local function print_table(tbl, indent)
+	indent = indent or 0
+	local formatting = string.rep("  ", indent)
+
+	for key, value in pairs(tbl) do
+		if type(value) == "table" then
+			print(formatting .. tostring(key) .. ":")
+			print_table(value, indent + 1)
+		else
+			print(formatting .. tostring(key) .. ": " .. tostring(value))
+		end
+	end
+end
+
 local cmp = require("cmp")
 
 local custom_source = {}
@@ -48,8 +63,7 @@ end
 -- This function defines the behavior of the completion source
 custom_source.complete = function(self, request, callback)
 	-- Define custom completion items
-	local inspect = require("inspect")
-	print(inspect(request))
+	print_table(request)
 	local items = {
 		{
 			label = "print",
