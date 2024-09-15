@@ -78,10 +78,17 @@ custom_source.get_metadata = function()
 	}
 end
 
+function print_table(tbl)
+	for key, value in pairs(tbl) do
+		print(key, "---", value)
+	end
+end
+
 custom_source.complete = function(self, request, callback)
 	for key, value in pairs(request) do
 		print(key, "---", value)
 	end
+	print_table(request)
 	M.send_post_request(function(response, error)
 		if error then
 			print(error)
