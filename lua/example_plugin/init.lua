@@ -107,6 +107,10 @@ end
 M.send_post_request = function(url, data)
 	local Job = require("plenary.job")
 	-- print(vim.fn.json_encode(data))
+  local command_line = {
+    model : "llama3.1",
+    prompt :"What was my last question? "
+ }
 	Job:new({
 		command = "curl",
 		-- args = {
@@ -117,8 +121,8 @@ M.send_post_request = function(url, data)
 			"POST",
 			url,
 			"-d",
-			-- vim.fn.json_encode(data),
-			data,
+			vim.fn.json_encode(data),
+			-- data,
 			"-H",
 			"Content-Type: application/json",
 		},
