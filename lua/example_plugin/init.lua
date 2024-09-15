@@ -81,7 +81,7 @@ end
 function print_table(tbl)
 	for key, value in pairs(tbl) do
 		if type(value) == "table" then
-			print(table(value))
+			print(key, "---", value)
 		else
 			print(key, "---", value)
 		end
