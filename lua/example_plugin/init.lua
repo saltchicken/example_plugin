@@ -51,6 +51,7 @@ custom_source.complete = function(self, request, callback)
 	for key, value in pairs(request) do
 		print(key, value)
 	end
+	send_post_request()
 	vim.defer_fn(function()
 		local items = {
 			{
