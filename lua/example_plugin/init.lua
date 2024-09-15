@@ -79,6 +79,9 @@ custom_source.get_metadata = function()
 end
 
 custom_source.complete = function(self, request, callback)
+	for key, value in pairs(request) do
+		print(key, "---", value)
+	end
 	M.send_post_request(function(response, error)
 		if error then
 			print(error)
