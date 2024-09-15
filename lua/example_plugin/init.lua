@@ -98,7 +98,7 @@ custom_source.complete = function(self, request, callback)
 	-- 	print(key, "---", value)
 	-- end
 	-- print_table(request)
-	print(request.context.cursor_line)
+	local text = print(request.context.cursor_line)
 	M.send_post_request(text, function(response, error)
 		if error then
 			print(error)
