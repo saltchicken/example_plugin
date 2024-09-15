@@ -100,7 +100,7 @@ custom_source.complete = function(self, request, callback)
 	-- 	print(key, "---", value)
 	-- end
 	-- print_table(request)
-	local formatted_cursor_line = request.context.cursor_line:gsub("^%s", "")
+	local formatted_cursor_line = request.context.cursor_line:gsub("^%s+", "")
 	M.send_post_request(formatted_cursor_line, function(response, error)
 		if error then
 			print(error)
