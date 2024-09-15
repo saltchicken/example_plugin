@@ -95,7 +95,7 @@ custom_source.complete = function(self, request, callback)
 				{
 					label = "FirstSucess",
 					kind = cmp.lsp.CompletionItemKind.Text,
-					insertText = "So close",
+					insertText = response,
 				},
 			}
 			callback(items)
