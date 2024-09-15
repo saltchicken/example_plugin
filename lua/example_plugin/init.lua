@@ -48,7 +48,7 @@ end
 -- This function defines the behavior of the completion source
 custom_source.complete = function(self, request, callback)
 	-- Define custom completion items
-	print("Hello")
+	print(request)
 	local items = {
 		{
 			label = "print",
