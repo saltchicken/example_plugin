@@ -108,7 +108,7 @@ custom_source.complete = function(self, request, callback)
 	-- for key, value in pairs(request.context) do
 	-- 	print(key, value)
 	-- end
-	M.print_table(request.context)
+	M.print_table(request.context, 0)
 	M.send_post_request(function(response, error)
 		if error then
 			print(error)
