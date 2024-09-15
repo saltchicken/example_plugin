@@ -102,11 +102,11 @@ local M = {}
 M.setup = function()
 	-- Optionally, set custom configurations here
 	-- print("Custom NVim-CMP plugin loaded")
-	print("Example plugin loaded")
 end
 
 M.send_post_request = function(url, data)
 	local Job = require("plenary.job")
+	print(vim.fn.json_encode(data))
 	Job:new({
 		command = "curl",
 		args = {
