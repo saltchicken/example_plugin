@@ -56,7 +56,7 @@ custom_source.complete = function(_, _, callback)
 			},
 		}
 		callback(items)
-	end, 500) -- Simulate a delay of 500ms (0.5 seconds)
+	end, 5000) -- Simulate a delay of 500ms (0.5 seconds)
 end
 -- This function defines the behavior of the completion source
 -- custom_source.complete = function(self, request, callback)
