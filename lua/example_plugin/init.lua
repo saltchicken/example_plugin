@@ -103,7 +103,7 @@ custom_source.complete = function(self, request, callback)
 		if error then
 			print(error)
 		else
-			print("Response String ----- ", response.response)
+			print("Response String ----- ", type(response))
 			local items = {
 				{
 					label = "FirstSucess",
