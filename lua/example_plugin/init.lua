@@ -25,6 +25,23 @@
 -- local function setup()
 -- 	require("example_plugin.cmp_source").setup()
 -- end
+
+function printTable(tbl, indent)
+	if not indent then
+		indent = 0
+	end
+	local indent_str = string.rep(" ", indent)
+	for k, v in pairs(tbl) do
+		if type(v) == "table" then
+			print(indent_str .. tostring(k) .. ": {")
+			printTable(v, indent + 4)
+			print(indent_str .. "}")
+		else
+			print(indent_str .. tostring(k) .. ": " .. tostring(v))
+		end
+	end
+end
+
 local M = {}
 
 M.setup = function()
@@ -87,10 +104,11 @@ custom_source.complete = function(self, request, callback)
 	-- 	print(key)
 	-- 	print(value)
 	-- end
-	print(request.name)
-	for key, value in pairs(request.context) do
-		print(key, value)
-	end
+	-- print(request.name)
+	-- for key, value in pairs(request.context) do
+	-- 	print(key, value)
+	-- end
+	print_table(request)
 	M.send_post_request(function(response, error)
 		if error then
 			print(error)
@@ -100,6 +118,7 @@ custom_source.complete = function(self, request, callback)
 				{
 					label = "FirstSucess",
 					kind = cmp.lsp.CompletionItemKind.Text,
+					documentation = "Here is some documentation",
 					insertText = response,
 				},
 			}
