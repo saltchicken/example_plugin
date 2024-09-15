@@ -33,7 +33,7 @@ M.setup = function()
 	-- print("Custom NVim-CMP plugin loaded")
 end
 
-M.send_post_request = function(callback)
+M.send_post_request = function(text, callback)
 	local Job = require("plenary.job")
 	Job:new({
 		command = "curl",
@@ -42,7 +42,7 @@ M.send_post_request = function(callback)
 			"POST",
 			"http://localhost:11434/api/generate",
 			"-d",
-			'{"model": "llama3.1", "prompt": "What was my last question?", "stream": false}',
+			'{"model": "llama3.1", "prompt": "' .. text .. '", "stream": false}',
 			"-H",
 			"Content-Type: application/json",
 		},
@@ -97,7 +97,7 @@ custom_source.complete = function(self, request, callback)
 	-- end
 	-- print_table(request)
 	print(request.context.cursor_line)
-	M.send_post_request(function(response, error)
+	M.send_post_request(text, function(response, error)
 		if error then
 			print(error)
 		else
