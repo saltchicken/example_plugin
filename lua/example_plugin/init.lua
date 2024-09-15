@@ -107,9 +107,10 @@ custom_source.complete = function(self, request, callback)
 			-- print("Response String ----- ", response)
 			local json = require("json")
 			local obj = json.decode(response)
+			print("Response: ", obj.response)
 			local items = {
 				{
-					label = "First Success",
+					label = "FirstSuccess",
 					kind = cmp.lsp.CompletionItemKind.Text,
 					documentation = "Here is some documentation",
 					insertText = obj.response,
