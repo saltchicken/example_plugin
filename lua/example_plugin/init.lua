@@ -112,7 +112,7 @@ custom_source.complete = function(self, request, callback)
 			print("Response: ", obj.response)
 			local items = {
 				{
-					label = request.context.cursor_line,
+					label = formatted_cursor_line,
 					kind = cmp.lsp.CompletionItemKind.Text,
 					documentation = "Here is some documentation",
 					insertText = obj.response,
