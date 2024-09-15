@@ -25,6 +25,32 @@
 -- local function setup()
 -- 	require("example_plugin.cmp_source").setup()
 -- end
+local Job = require("plenary.job")
+
+local function send_post_request(url, data)
+	Job:new({
+		command = "curl",
+		args = {
+			"-X",
+			"POST",
+			url,
+			"-d",
+			vim.fn.json_encode(data),
+			"-H",
+			"Content-Type: application/json",
+		},
+		on_exit = function(j, return_val)
+			if return_val == 0 then
+				print("POST request successful!")
+				print(table.concat(j:result(), "\n"))
+			else
+				print("POST request failed!")
+				print(table.concat(j:stderr_result(), "\n"))
+			end
+		end,
+	}):start()
+end
+
 local cmp = require("cmp")
 
 local custom_source = {}
