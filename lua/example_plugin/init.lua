@@ -103,17 +103,16 @@ custom_source.complete = function(self, request, callback)
 		if error then
 			print(error)
 		else
-			print("Response String ----- ", type(response))
-			print("Response String ----- ", response)
+			-- print("Response String ----- ", type(response))
+			-- print("Response String ----- ", response)
 			local json = require("json")
 			local obj = json.decode(response)
-			print("Finall", obj.response)
 			local items = {
 				{
-					label = "FirstSucess",
+					label = "First Success",
 					kind = cmp.lsp.CompletionItemKind.Text,
 					documentation = "Here is some documentation",
-					insertText = response,
+					insertText = obj.response,
 				},
 			}
 			callback({
