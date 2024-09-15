@@ -35,7 +35,6 @@ end
 
 M.send_post_request = function(callback)
 	local Job = require("plenary.job")
-	-- print(vim.fn.json_encode(data))
 	Job:new({
 		command = "curl",
 		args = {
@@ -49,33 +48,14 @@ M.send_post_request = function(callback)
 		},
 		on_exit = function(j, return_val)
 			if return_val == 0 then
-				-- print("POST request successful!")
-				-- return table.concat(j:result(), "\n")
 				local result = table.concat(j:result(), "\n")
 				callback(result)
 			else
 				print("POST request failed!")
-				-- print(table.concat(j:stderr_result(), "\n"))
 				callback(nil, "Error: POST failed")
 			end
 		end,
 	}):start()
-end
-
-M.printTable = function(tbl, indent)
-	if not indent then
-		indent = 0
-	end
-	local indent_str = string.rep(" ", indent)
-	for k, v in pairs(tbl) do
-		if type(v) == "table" then
-			print(indent_str .. tostring(k) .. ": {")
-			printTable(v, indent + 4)
-			print(indent_str .. "}")
-		else
-			print(indent_str .. tostring(k) .. ": " .. tostring(v))
-		end
-	end
 end
 
 local cmp = require("cmp")
@@ -103,7 +83,6 @@ custom_source.complete = function(self, request, callback)
 		if error then
 			print(error)
 		else
-			-- print("Response: ", response)
 			local items = {
 				{
 					label = "FirstSucess",
@@ -119,16 +98,8 @@ custom_source.complete = function(self, request, callback)
 		end
 	end)
 end
--- 	-- Return the completion items as the result
--- 	callback({
--- 		items = items,
--- 		isIncomplete = false,
--- 	})
--- end
 
 -- Register the custom source in `cmp`
 cmp.register_source("custom_source", custom_source.new())
-
--- Expose a setup function to initialize the plugin
 
 return M
