@@ -32,7 +32,7 @@ M.setup = function()
 	-- print("Custom NVim-CMP plugin loaded")
 end
 
-M.send_post_request = function()
+M.send_post_request = function(callback)
 	local Job = require("plenary.job")
 	-- print(vim.fn.json_encode(data))
 	Job:new({
@@ -48,11 +48,14 @@ M.send_post_request = function()
 		},
 		on_exit = function(j, return_val)
 			if return_val == 0 then
-				print("POST request successful!")
-				print(table.concat(j:result(), "\n"))
+				-- print("POST request successful!")
+				-- return table.concat(j:result(), "\n")
+				local result = table.concat(j:result(), "\n")
+				callback(result)
 			else
 				print("POST request failed!")
-				print(table.concat(j:stderr_result(), "\n"))
+				-- print(table.concat(j:stderr_result(), "\n"))
+				callback(nil, "Error: POST failed")
 			end
 		end,
 	}):start()
@@ -83,7 +86,13 @@ custom_source.complete = function(self, request, callback)
 	for key, value in pairs(request) do
 		print(key, value)
 	end
-	M.send_post_request()
+	M.send_post_request(function(response, error)
+		if error then
+			print(error)
+		else
+			print("Response: ", response)
+		end
+	end)
 	vim.defer_fn(function()
 		local items = {
 			{
