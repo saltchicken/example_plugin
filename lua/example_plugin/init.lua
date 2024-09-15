@@ -83,9 +83,13 @@ end
 
 custom_source.complete = function(self, request, callback)
 	-- Simulate an asynchronous operation
-	for key, value in pairs(request) do
-		print(key)
-		print(value)
+	-- for key, value in pairs(request) do
+	-- 	print(key)
+	-- 	print(value)
+	-- end
+	print(request.name)
+	for key, value in pairs(request.context) do
+		print(key, value)
 	end
 	M.send_post_request(function(response, error)
 		if error then
