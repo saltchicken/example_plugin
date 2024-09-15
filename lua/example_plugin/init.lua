@@ -35,6 +35,8 @@ end
 
 M.send_post_request = function(text, callback)
 	local Job = require("plenary.job")
+
+	local prompt_string = '{"model": "llama3.1", "prompt": "What was my last question?", "stream": false}'
 	Job:new({
 		command = "curl",
 		args = {
@@ -42,7 +44,7 @@ M.send_post_request = function(text, callback)
 			"POST",
 			"http://localhost:11434/api/generate",
 			"-d",
-			'{"model": "llama3.1", "prompt": "' .. text .. '", "stream": false}',
+			prompt_string,
 			"-H",
 			"Content-Type: application/json",
 		},
