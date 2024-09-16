@@ -36,8 +36,8 @@ end
 M.send_post_request = function(text, callback)
 	local Job = require("plenary.job")
 	print("Iam the text: ", text)
-	-- local escaped_text = text:gsub('"', '\"')
-	local prompt_string = string.format('{"model": "llama3.1", "prompt": "%s", "stream": false}', text)
+	local escaped_text = text:gsub('"', '"')
+	local prompt_string = string.format('{"model": "llama3.1", "prompt": "%s", "stream": false}', escaped_text)
 	print("Prompt STring", prompt_string)
 	Job:new({
 		command = "curl",
