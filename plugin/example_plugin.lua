@@ -4,4 +4,4 @@
 -- 	print("Called inside ")
 -- 	example_plugin.hello()
 -- end, {})
-print("hello world")
+-- print("hello world")
