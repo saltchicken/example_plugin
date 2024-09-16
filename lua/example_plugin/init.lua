@@ -36,8 +36,9 @@ end
 M.send_post_request = function(text, callback)
 	local Job = require("plenary.job")
 	print("Iam the text: ", text)
-	local guidance_string =
-		"You area a code completer. Only respond with appended code that is recommended. In the following example how would you complete the line of code? "
+	local guidance_string = ""
+	-- local guidance_string =
+	-- 	"You area a code completer. Only respond with appended code that is recommended. In the following example how would you complete the line of code? "
 	local escaped_text = text:gsub('"', '\\"')
 	local prompt_string =
 		string.format('{"model": "llama3.1", "prompt": "%s%s", "stream": false}', guidance_string, escaped_text)
